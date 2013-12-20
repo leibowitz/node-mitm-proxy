@@ -13,6 +13,7 @@ var process_options = function(proxy_options) {
   var options = proxy_options || {}
 
   if(!options.proxy_port)            options.proxy_port       = 8080;
+  if(!options.proxy_host)            options.proxy_host       = '0.0.0.0';
   if(!options.mitm_port)             options.mitm_port        = 8000;
   if(!options.verbose === false)     options.verbose          = true;
   if(!options.proxy_write === true)  options.proxy_write      = false;
@@ -162,6 +163,6 @@ module.exports = function(proxy_options, processor_class) {
     sys.log("error on server?")
   })
 
-  server.listen(this.options.proxy_port);
-  if(this.options.verbose) console.log('http proxy server '.blue + 'started '.green.bold + 'on port '.blue + (""+this.options.proxy_port).yellow);
+  server.listen(this.options.proxy_port, this.options.proxy_host);
+  if(this.options.verbose) console.log('http proxy server '.blue + 'started '.green.bold + 'on '.blue + (""+this.options.proxy_host).yellow + ' port '.blue + (""+this.options.proxy_port).yellow);
 }
